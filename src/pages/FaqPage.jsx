@@ -26,32 +26,32 @@ export const FaqPage = () => {
   return (
     <>
       <Helmet>
-        <title>Frequently Asked Questions (FAQs) — CogniGuard</title>
+        <title>Frequently Asked Questions — CogniGuard</title>
         <meta name="description" content="Find answers to common questions about early dementia screening, speech voice analysis, memory testing, and clinical referrals." />
       </Helmet>
 
       <div className="main-container">
         <Breadcrumbs />
 
-        <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 3rem' }}>
-          <div style={{ width: '60px', height: '60px', borderRadius: '50%', backgroundColor: 'var(--color-brand-teal-light)', color: 'var(--color-brand-teal-dark)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
-            <HelpCircle size={30} />
+        <div style={{ textAlign: 'center', maxWidth: '680px', margin: '0 auto 2.25rem' }}>
+          <div style={{ width: '50px', height: '50px', borderRadius: '50%', backgroundColor: 'var(--color-brand-teal-light)', color: 'var(--color-brand-teal-dark)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.75rem' }}>
+            <HelpCircle size={26} />
           </div>
-          <h1 style={{ fontSize: '2.2rem', color: 'var(--color-navy)', marginBottom: '0.75rem' }}>
+          <h1 style={{ fontSize: '1.75rem', color: 'var(--color-heading)', marginBottom: '0.5rem' }}>
             Frequently Asked Questions
           </h1>
-          <p style={{ color: 'var(--color-text-muted)', fontSize: '1.1rem' }}>
+          <p style={{ color: 'var(--color-text-muted)', fontSize: '0.95rem' }}>
             Learn how CogniGuard AI detects subtle cognitive changes and how to interpret your screening results.
           </p>
         </div>
 
         {loading ? (
-          <div style={{ textAlign: 'center', padding: '3rem' }}>
-            <Activity size={36} className="spin" color="var(--color-brand-teal)" />
-            <p>Loading FAQs...</p>
+          <div style={{ textAlign: 'center', padding: '2.5rem' }}>
+            <Activity size={32} className="spin" color="var(--color-brand-teal)" />
+            <p style={{ marginTop: '0.75rem', color: 'var(--color-text-muted)' }}>Loading FAQs...</p>
           </div>
         ) : (
-          <div style={{ maxWidth: '850px', margin: '0 auto 3rem' }}>
+          <div style={{ maxWidth: '800px', margin: '0 auto 3rem' }}>
             <Accordion items={faqs} />
           </div>
         )}

@@ -38,21 +38,21 @@ export const LoginPage = () => {
         <meta name="description" content="Log in to access your early dementia cognitive screening dashboard and past clinical reports." />
       </Helmet>
 
-      <div className="main-container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 'calc(100vh - 200px)', padding: '2rem 1.5rem' }}>
-        <div className="card" style={{ width: '100%', maxWidth: '460px', padding: '2.5rem 2rem' }}>
-          <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-            <div style={{ width: '56px', height: '56px', borderRadius: '50%', backgroundColor: 'var(--color-brand-teal-light)', color: 'var(--color-brand-teal-dark)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
-              <LogIn size={26} />
+      <div className="main-container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 'calc(100vh - 180px)', padding: '1.5rem 1rem' }}>
+        <div className="card" style={{ width: '100%', maxWidth: '420px', padding: '1.75rem 1.5rem' }}>
+          <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
+            <div style={{ width: '48px', height: '48px', borderRadius: '50%', backgroundColor: 'var(--color-brand-teal-light)', color: 'var(--color-brand-teal-dark)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.75rem' }}>
+              <LogIn size={22} />
             </div>
-            <h1 style={{ fontSize: '1.8rem', color: 'var(--color-navy)', marginBottom: '0.5rem' }}>Patient / Clinician Login</h1>
-            <p style={{ color: 'var(--color-text-muted)', fontSize: '0.95rem' }}>
+            <h1 style={{ fontSize: '1.5rem', color: 'var(--color-heading)', marginBottom: '0.35rem' }}>Patient / Clinician Login</h1>
+            <p style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem' }}>
               Enter your registered email and password to access your cognitive tests.
             </p>
           </div>
 
           {error && (
-            <div style={{ backgroundColor: 'var(--color-high-risk-bg)', color: 'var(--color-high-risk)', padding: '0.85rem 1rem', borderRadius: 'var(--radius-md)', display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '1.25rem', fontSize: '0.9rem' }}>
-              <AlertCircle size={18} style={{ flexShrink: 0 }} />
+            <div style={{ backgroundColor: 'var(--color-high-risk-bg)', color: 'var(--color-high-risk)', padding: '0.75rem 0.85rem', borderRadius: 'var(--radius-md)', display: 'flex', alignItems: 'center', gap: '0.4rem', marginBottom: '1rem', fontSize: '0.85rem' }}>
+              <AlertCircle size={16} style={{ flexShrink: 0 }} />
               {error}
             </div>
           )}
@@ -71,9 +71,9 @@ export const LoginPage = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="form-input"
-                  style={{ paddingLeft: '2.6rem' }}
+                  style={{ paddingLeft: '2.5rem' }}
                 />
-                <Mail size={18} style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-slate-muted)' }} />
+                <Mail size={16} style={{ position: 'absolute', left: '0.85rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-text-muted)' }} />
               </div>
             </div>
 
@@ -90,9 +90,9 @@ export const LoginPage = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="form-input"
-                  style={{ paddingLeft: '2.6rem' }}
+                  style={{ paddingLeft: '2.5rem' }}
                 />
-                <Lock size={18} style={{ position: 'absolute', left: '1rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-slate-muted)' }} />
+                <Lock size={16} style={{ position: 'absolute', left: '0.85rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--color-text-muted)' }} />
               </div>
             </div>
 
@@ -100,13 +100,13 @@ export const LoginPage = () => {
               type="submit"
               disabled={loading}
               className="btn btn-primary"
-              style={{ width: '100%', marginTop: '1rem' }}
+              style={{ width: '100%', marginTop: '0.75rem' }}
             >
               {loading ? 'Logging in...' : 'Log In to Dashboard'}
             </button>
           </form>
 
-          <div style={{ textAlign: 'center', marginTop: '1.75rem', fontSize: '0.95rem', color: 'var(--color-text-muted)', borderTop: '1px solid var(--color-slate-light)', paddingTop: '1.25rem' }}>
+          <div style={{ textAlign: 'center', marginTop: '1.25rem', fontSize: '0.875rem', color: 'var(--color-text-muted)', borderTop: '1px solid var(--color-border)', paddingTop: '1rem' }}>
             Don't have an account?{' '}
             <Link to="/signup" style={{ color: 'var(--color-brand-teal)', fontWeight: 700 }}>
               Create Free Account

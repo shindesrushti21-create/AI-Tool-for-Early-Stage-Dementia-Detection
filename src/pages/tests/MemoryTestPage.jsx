@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { Brain, Eye, CheckCircle, ArrowRight, Clock, AlertCircle } from 'lucide-react';
+import { Brain, CheckCircle, ArrowRight, Clock } from 'lucide-react';
 import { Breadcrumbs } from '../../components/Breadcrumbs';
 import api from '../../api/client';
 import { trackEvent } from '../../utils/analytics';
@@ -14,13 +14,12 @@ export const MemoryTestPage = () => {
 
   const sessionId = location.state?.sessionId || sessionStorage.getItem('current_session_id') || `sess_${Date.now()}`;
 
-  const [phase, setPhase] = useState('exposure'); // 'exposure' | 'recall' | 'submitting'
+  const [phase, setPhase] = useState('exposure');
   const [timeLeft, setTimeLeft] = useState(6);
   const [userInputs, setUserInputs] = useState(['', '', '', '', '']);
   const [selectedWords, setSelectedWords] = useState([]);
   const [submitting, setSubmitting] = useState(false);
 
-  // Candidate choice words for multi-choice recall
   const CHOICE_GRID = [
     'Apple', 'Chair', 'Clock', 'River', 'Ocean', 
     'Garden', 'Blanket', 'Pillow', 'Mirror', 'Window'
@@ -30,7 +29,6 @@ export const MemoryTestPage = () => {
     trackEvent('test_memory_started', { sessionId });
   }, [sessionId]);
 
-  // Exposure phase timer (6 seconds)
   useEffect(() => {
     if (phase === 'exposure') {
       if (timeLeft > 0) {
@@ -60,7 +58,6 @@ export const MemoryTestPage = () => {
     e.preventDefault();
     setSubmitting(true);
 
-    // Combine typed inputs and clicked checkboxes
     const typedWords = userInputs.map(w => w.trim()).filter(Boolean);
     const combinedRecalled = Array.from(new Set([...typedWords, ...selectedWords]));
 
@@ -75,11 +72,9 @@ export const MemoryTestPage = () => {
         score: res.data?.score
       });
 
-      // Proceed to Cognitive test screen in sequence
       navigate('/test/cognitive', { state: { sessionId } });
     } catch (err) {
       console.error('Memory test submit error:', err);
-      // Fallback navigation
       navigate('/test/cognitive', { state: { sessionId } });
     } finally {
       setSubmitting(false);
@@ -97,25 +92,25 @@ export const MemoryTestPage = () => {
         <Breadcrumbs />
 
         {/* STEP PROGRESS BAR */}
-        <div style={{ marginBottom: '2rem' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem', fontSize: '0.9rem', fontWeight: 700, color: 'var(--color-navy)' }}>
+        <div style={{ marginBottom: '1.5rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.4rem', fontSize: '0.85rem', fontWeight: 700, color: 'var(--color-heading)' }}>
             <span>Step 1 of 3: Short-Term Memory Assessment</span>
             <span>33% Completed</span>
           </div>
-          <div style={{ height: '8px', backgroundColor: 'var(--color-slate-light)', borderRadius: '9999px', overflow: 'hidden' }}>
+          <div style={{ height: '6px', backgroundColor: 'var(--color-border)', borderRadius: '9999px', overflow: 'hidden' }}>
             <div style={{ width: '33%', height: '100%', backgroundColor: 'var(--color-brand-teal)', borderRadius: '9999px' }}></div>
           </div>
         </div>
 
-        <div className="card" style={{ maxWidth: '750px', margin: '0 auto', padding: '2.5rem 2rem' }}>
-          <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-            <div style={{ width: '60px', height: '60px', borderRadius: '50%', backgroundColor: 'var(--color-brand-teal-light)', color: 'var(--color-brand-teal-dark)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
-              <Brain size={30} />
+        <div className="card" style={{ maxWidth: '680px', margin: '0 auto', padding: '1.75rem 1.5rem' }}>
+          <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
+            <div style={{ width: '50px', height: '50px', borderRadius: '50%', backgroundColor: 'var(--color-brand-teal-light)', color: 'var(--color-brand-teal-dark)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.75rem' }}>
+              <Brain size={26} />
             </div>
-            <h1 style={{ fontSize: '1.8rem', color: 'var(--color-navy)', marginBottom: '0.5rem' }}>
+            <h1 style={{ fontSize: '1.5rem', color: 'var(--color-heading)', marginBottom: '0.35rem' }}>
               Short-Term Memory Word Recall
             </h1>
-            <p style={{ color: 'var(--color-text-muted)', fontSize: '1rem' }}>
+            <p style={{ color: 'var(--color-text-muted)', fontSize: '0.9rem' }}>
               {phase === 'exposure' 
                 ? 'Memorize the 5 words below before the timer runs out.' 
                 : 'Now select or type as many of the 5 words as you can remember.'}
@@ -125,25 +120,24 @@ export const MemoryTestPage = () => {
           {/* PHASE 1: EXPOSURE */}
           {phase === 'exposure' && (
             <div style={{ textAlign: 'center' }}>
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', backgroundColor: '#FEF3C7', color: '#D97706', padding: '0.5rem 1.25rem', borderRadius: '9999px', fontWeight: 800, fontSize: '1.1rem', marginBottom: '2rem' }}>
-                <Clock size={20} />
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', backgroundColor: 'var(--color-mod-risk-bg)', color: 'var(--color-mod-risk)', padding: '0.4rem 1rem', borderRadius: '9999px', fontWeight: 800, fontSize: '0.95rem', marginBottom: '1.5rem', border: '1px solid var(--color-mod-risk-border)' }}>
+                <Clock size={16} />
                 Words will disappear in: {timeLeft}s
               </div>
 
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'center', marginBottom: '2.5rem' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem', justifyContent: 'center', marginBottom: '2rem' }}>
                 {TARGET_WORDS.map((word, idx) => (
                   <div
                     key={idx}
                     className="card"
                     style={{
-                      padding: '1.25rem 2rem',
-                      fontSize: '1.5rem',
+                      padding: '1rem 1.5rem',
+                      fontSize: '1.25rem',
                       fontWeight: 800,
-                      color: 'var(--color-navy)',
+                      color: 'var(--color-heading)',
                       border: '2px solid var(--color-brand-teal)',
-                      boxShadow: 'var(--shadow-md)',
-                      backgroundColor: '#FFFFFF',
-                      minWidth: '130px'
+                      backgroundColor: 'var(--color-card-bg)',
+                      minWidth: '110px'
                     }}
                   >
                     {word}
@@ -154,7 +148,7 @@ export const MemoryTestPage = () => {
               <button
                 onClick={() => setPhase('recall')}
                 className="btn btn-secondary"
-                style={{ padding: '0.6rem 1.5rem' }}
+                style={{ padding: '0.5rem 1.25rem' }}
               >
                 I'm ready now (Skip countdown)
               </button>
@@ -164,11 +158,11 @@ export const MemoryTestPage = () => {
           {/* PHASE 2: RECALL */}
           {phase === 'recall' && (
             <form onSubmit={handleSubmit}>
-              <div style={{ marginBottom: '2rem' }}>
-                <h3 style={{ fontSize: '1.15rem', marginBottom: '0.75rem', color: 'var(--color-navy)' }}>
+              <div style={{ marginBottom: '1.5rem' }}>
+                <h3 style={{ fontSize: '1.05rem', marginBottom: '0.65rem', color: 'var(--color-heading)' }}>
                   Option A: Click the words you remember seeing:
                 </h3>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem' }}>
                   {CHOICE_GRID.map((word) => {
                     const isSelected = selectedWords.includes(word);
                     return (
@@ -178,13 +172,13 @@ export const MemoryTestPage = () => {
                         onClick={() => toggleSelectWord(word)}
                         className={`btn ${isSelected ? 'btn-primary' : 'btn-secondary'}`}
                         style={{
-                          padding: '0.6rem 1.25rem',
-                          minHeight: '44px',
-                          fontSize: '1rem',
-                          borderColor: isSelected ? 'var(--color-brand-teal)' : 'var(--color-slate-light)'
+                          padding: '0.5rem 1rem',
+                          minHeight: '38px',
+                          fontSize: '0.9rem',
+                          borderColor: isSelected ? 'var(--color-brand-teal)' : 'var(--color-border)'
                         }}
                       >
-                        {isSelected && <CheckCircle size={16} />}
+                        {isSelected && <CheckCircle size={14} />}
                         {word}
                       </button>
                     );
@@ -192,11 +186,11 @@ export const MemoryTestPage = () => {
                 </div>
               </div>
 
-              <div style={{ marginBottom: '2rem', borderTop: '1px solid var(--color-slate-light)', paddingTop: '1.5rem' }}>
-                <h3 style={{ fontSize: '1.15rem', marginBottom: '0.75rem', color: 'var(--color-navy)' }}>
+              <div style={{ marginBottom: '1.5rem', borderTop: '1px solid var(--color-border)', paddingTop: '1.25rem' }}>
+                <h3 style={{ fontSize: '1.05rem', marginBottom: '0.65rem', color: 'var(--color-heading)' }}>
                   Option B: Or type any recalled words directly:
                 </h3>
-                <div className="grid-2" style={{ gap: '0.75rem' }}>
+                <div className="grid-2" style={{ gap: '0.65rem' }}>
                   {userInputs.map((val, idx) => (
                     <input
                       key={idx}
@@ -217,7 +211,7 @@ export const MemoryTestPage = () => {
                 style={{ width: '100%' }}
               >
                 {submitting ? 'Saving Memory Score...' : 'Submit Memory Test & Continue to Step 2'}
-                <ArrowRight size={20} />
+                <ArrowRight size={18} />
               </button>
             </form>
           )}

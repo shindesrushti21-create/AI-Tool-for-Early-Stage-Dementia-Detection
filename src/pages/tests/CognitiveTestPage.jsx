@@ -14,7 +14,7 @@ export const CognitiveTestPage = () => {
 
   const TOTAL_TRIALS = 5;
   const [trial, setTrial] = useState(0);
-  const [gameState, setGameState] = useState('idle'); // 'idle' | 'waiting' | 'ready' | 'finished'
+  const [gameState, setGameState] = useState('idle');
   const [reactionTimes, setReactionTimes] = useState([]);
   const [errors, setErrors] = useState(0);
   const [submitting, setSubmitting] = useState(false);
@@ -31,7 +31,6 @@ export const CognitiveTestPage = () => {
 
   const startNextTrial = () => {
     setGameState('waiting');
-    // Random delay between 1.5s and 3.5s
     const randomDelay = Math.floor(Math.random() * 2000) + 1500;
 
     timerRef.current = setTimeout(() => {
@@ -42,7 +41,6 @@ export const CognitiveTestPage = () => {
 
   const handleTargetClick = () => {
     if (gameState === 'waiting') {
-      // Clicked too early! Record error
       setErrors(prev => prev + 1);
       clearTimeout(timerRef.current);
       alert('Too early! Wait for the target to turn bright GREEN before clicking.');
@@ -84,7 +82,6 @@ export const CognitiveTestPage = () => {
         errors
       });
 
-      // Proceed to Speech test screen in sequence
       navigate('/test/speech', { state: { sessionId } });
     } catch (err) {
       console.error('Cognitive test submit error:', err);
@@ -109,25 +106,25 @@ export const CognitiveTestPage = () => {
         <Breadcrumbs />
 
         {/* STEP PROGRESS BAR */}
-        <div style={{ marginBottom: '2rem' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem', fontSize: '0.9rem', fontWeight: 700, color: 'var(--color-navy)' }}>
+        <div style={{ marginBottom: '1.5rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.4rem', fontSize: '0.85rem', fontWeight: 700, color: 'var(--color-heading)' }}>
             <span>Step 2 of 3: Visual Reaction Latency Test</span>
             <span>66% Completed</span>
           </div>
-          <div style={{ height: '8px', backgroundColor: 'var(--color-slate-light)', borderRadius: '9999px', overflow: 'hidden' }}>
+          <div style={{ height: '6px', backgroundColor: 'var(--color-border)', borderRadius: '9999px', overflow: 'hidden' }}>
             <div style={{ width: '66%', height: '100%', backgroundColor: 'var(--color-brand-teal)', borderRadius: '9999px' }}></div>
           </div>
         </div>
 
-        <div className="card" style={{ maxWidth: '750px', margin: '0 auto', padding: '2.5rem 2rem' }}>
-          <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-            <div style={{ width: '60px', height: '60px', borderRadius: '50%', backgroundColor: '#FEF3C7', color: '#D97706', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
-              <Zap size={30} />
+        <div className="card" style={{ maxWidth: '680px', margin: '0 auto', padding: '1.75rem 1.5rem' }}>
+          <div style={{ textAlign: 'center', marginBottom: '1.5rem' }}>
+            <div style={{ width: '50px', height: '50px', borderRadius: '50%', backgroundColor: 'var(--color-mod-risk-bg)', color: 'var(--color-mod-risk)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.75rem' }}>
+              <Zap size={26} />
             </div>
-            <h1 style={{ fontSize: '1.8rem', color: 'var(--color-navy)', marginBottom: '0.5rem' }}>
+            <h1 style={{ fontSize: '1.5rem', color: 'var(--color-heading)', marginBottom: '0.35rem' }}>
               Visual Reaction Latency Test
             </h1>
-            <p style={{ color: 'var(--color-text-muted)', fontSize: '1rem' }}>
+            <p style={{ color: 'var(--color-text-muted)', fontSize: '0.9rem' }}>
               Trial {Math.min(trial + 1, TOTAL_TRIALS)} of {TOTAL_TRIALS}. Click <strong>START TRIAL</strong>, then tap the target as fast as you can when it turns <strong>BRIGHT GREEN</strong>.
             </p>
           </div>
@@ -142,7 +139,7 @@ export const CognitiveTestPage = () => {
                 aria-label="Reaction target zone"
                 style={{
                   width: '100%',
-                  height: '240px',
+                  height: '200px',
                   borderRadius: 'var(--radius-lg)',
                   display: 'flex',
                   flexDirection: 'column',
@@ -152,21 +149,21 @@ export const CognitiveTestPage = () => {
                   userSelect: 'none',
                   transition: 'background-color 0.15s ease',
                   backgroundColor: gameState === 'ready' 
-                    ? 'var(--color-low-risk)' 
+                    ? '#059669' 
                     : gameState === 'waiting' 
-                    ? '#E2E8F0' 
-                    : '#FAFDFD',
+                    ? 'var(--color-card-subtle)' 
+                    : 'var(--color-card-bg)',
                   border: gameState === 'ready' 
-                    ? '4px solid #047857' 
+                    ? '3px solid #047857' 
                     : '2px dashed var(--color-brand-teal)',
-                  boxShadow: gameState === 'ready' ? '0 0 30px rgba(5, 150, 105, 0.5)' : 'none',
-                  marginBottom: '2rem'
+                  boxShadow: gameState === 'ready' ? '0 0 24px rgba(5, 150, 105, 0.4)' : 'none',
+                  marginBottom: '1.5rem'
                 }}
               >
                 {gameState === 'idle' && (
                   <div>
-                    <Target size={48} color="var(--color-brand-teal)" style={{ marginBottom: '0.5rem' }} />
-                    <p style={{ fontWeight: 700, fontSize: '1.2rem', color: 'var(--color-navy)' }}>
+                    <Target size={40} color="var(--color-brand-teal)" style={{ marginBottom: '0.4rem' }} />
+                    <p style={{ fontWeight: 700, fontSize: '1.05rem', color: 'var(--color-heading)' }}>
                       Press "Start Round {trial + 1}" Below
                     </p>
                   </div>
@@ -174,8 +171,8 @@ export const CognitiveTestPage = () => {
 
                 {gameState === 'waiting' && (
                   <div>
-                    <RefreshCw size={40} className="spin" style={{ color: 'var(--color-slate-muted)', marginBottom: '0.5rem' }} />
-                    <p style={{ fontWeight: 700, fontSize: '1.2rem', color: 'var(--color-text-muted)' }}>
+                    <RefreshCw size={32} className="spin" style={{ color: 'var(--color-text-muted)', marginBottom: '0.4rem' }} />
+                    <p style={{ fontWeight: 700, fontSize: '1.05rem', color: 'var(--color-text-muted)' }}>
                       Get Ready... Wait for GREEN!
                     </p>
                   </div>
@@ -183,8 +180,8 @@ export const CognitiveTestPage = () => {
 
                 {gameState === 'ready' && (
                   <div>
-                    <Zap size={56} color="#FFFFFF" style={{ marginBottom: '0.5rem' }} />
-                    <h2 style={{ color: '#FFFFFF', fontSize: '2rem' }}>TAP / CLICK NOW!</h2>
+                    <Zap size={48} color="#FFFFFF" style={{ marginBottom: '0.4rem' }} />
+                    <h2 style={{ color: '#FFFFFF', fontSize: '1.75rem' }}>TAP / CLICK NOW!</h2>
                   </div>
                 )}
               </div>
@@ -193,7 +190,7 @@ export const CognitiveTestPage = () => {
                 <button
                   onClick={startNextTrial}
                   className="btn btn-primary btn-lg"
-                  style={{ minWidth: '220px' }}
+                  style={{ minWidth: '200px' }}
                 >
                   Start Round {trial + 1}
                 </button>
@@ -202,10 +199,10 @@ export const CognitiveTestPage = () => {
           ) : (
             /* FINISHED STATE */
             <div style={{ textAlign: 'center' }}>
-              <div style={{ backgroundColor: 'var(--color-low-risk-bg)', color: 'var(--color-low-risk)', padding: '1.5rem', borderRadius: 'var(--radius-md)', marginBottom: '2rem' }}>
-                <CheckCircle2 size={36} style={{ marginBottom: '0.5rem' }} />
-                <h2 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>Reaction Test Complete!</h2>
-                <p style={{ fontSize: '1.1rem' }}>
+              <div style={{ backgroundColor: 'var(--color-low-risk-bg)', color: 'var(--color-low-risk)', padding: '1.25rem', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-low-risk-border)', marginBottom: '1.5rem' }}>
+                <CheckCircle2 size={32} style={{ marginBottom: '0.4rem' }} />
+                <h2 style={{ fontSize: '1.3rem', marginBottom: '0.35rem' }}>Reaction Test Complete!</h2>
+                <p style={{ fontSize: '1rem' }}>
                   Average Latency: <strong>{avgReaction} ms</strong> | Mis-click Errors: <strong>{errors}</strong>
                 </p>
               </div>
@@ -217,16 +214,16 @@ export const CognitiveTestPage = () => {
                 style={{ width: '100%' }}
               >
                 {submitting ? 'Saving Latency Score...' : 'Continue to Step 3: Speech Analysis'}
-                <ArrowRight size={20} />
+                <ArrowRight size={18} />
               </button>
             </div>
           )}
 
           {/* REACTION HISTORY SCORES */}
           {reactionTimes.length > 0 && gameState !== 'finished' && (
-            <div style={{ marginTop: '2rem', borderTop: '1px solid var(--color-slate-light)', paddingTop: '1.25rem', display: 'flex', gap: '0.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+            <div style={{ marginTop: '1.5rem', borderTop: '1px solid var(--color-border)', paddingTop: '1rem', display: 'flex', gap: '0.4rem', justifyContent: 'center', flexWrap: 'wrap' }}>
               {reactionTimes.map((time, i) => (
-                <span key={i} className="badge badge-low" style={{ fontSize: '0.9rem', padding: '0.4rem 0.8rem' }}>
+                <span key={i} className="badge badge-low" style={{ fontSize: '0.8rem', padding: '0.3rem 0.65rem' }}>
                   Trial {i + 1}: {time}ms
                 </span>
               ))}

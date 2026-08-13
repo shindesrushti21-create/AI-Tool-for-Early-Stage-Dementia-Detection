@@ -7,7 +7,6 @@ export const StickyMobileCTA = () => {
   const location = useLocation();
   const { isAuthenticated } = useAuth();
 
-  // Hide on test screens or report screen to prevent UI blocking
   if (location.pathname.startsWith('/test/') || location.pathname.startsWith('/report/')) {
     return null;
   }
@@ -17,15 +16,15 @@ export const StickyMobileCTA = () => {
   return (
     <div className="sticky-mobile-cta" role="region" aria-label="Quick Mobile Action">
       <div>
-        <strong style={{ fontSize: '0.9rem', color: 'var(--color-navy)', display: 'block' }}>
+        <strong style={{ fontSize: '0.85rem', color: 'var(--color-heading)', display: 'block' }}>
           Free Cognitive Screening
         </strong>
         <span style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)' }}>
           Takes under 5 minutes
         </span>
       </div>
-      <Link to={targetRoute} className="btn btn-primary" style={{ padding: '0.6rem 1.2rem', minHeight: '44px' }}>
-        <Activity size={18} />
+      <Link to={targetRoute} className="btn btn-primary" style={{ padding: '0.5rem 1rem', minHeight: '38px', fontSize: '0.85rem' }}>
+        <Activity size={16} />
         Start Screening
       </Link>
     </div>

@@ -9,7 +9,7 @@ export const Accordion = ({ items = [] }) => {
   };
 
   return (
-    <div className="accordion-wrapper" style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+    <div className="accordion-wrapper" style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
       {items.map((item, idx) => {
         const isOpen = openIndex === idx;
         return (
@@ -17,9 +17,9 @@ export const Accordion = ({ items = [] }) => {
             key={item.id || idx}
             className="card"
             style={{
-              padding: '1.25rem 1.5rem',
-              borderColor: isOpen ? 'var(--color-brand-teal)' : 'var(--color-slate-light)',
-              backgroundColor: isOpen ? '#FAFDFD' : 'var(--color-card-bg)'
+              padding: '1rem 1.25rem',
+              borderColor: isOpen ? 'var(--color-brand-teal)' : 'var(--color-border)',
+              backgroundColor: isOpen ? 'var(--color-card-subtle)' : 'var(--color-card-bg)'
             }}
           >
             <button
@@ -37,21 +37,22 @@ export const Accordion = ({ items = [] }) => {
                 textAlign: 'left',
                 cursor: 'pointer',
                 fontFamily: 'var(--font-heading)',
-                fontSize: '1.15rem',
+                fontSize: '1.05rem',
                 fontWeight: 600,
-                color: 'var(--color-navy)',
-                gap: '1rem'
+                color: 'var(--color-heading)',
+                gap: '0.75rem'
               }}
             >
-              <span style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                <HelpCircle size={22} color="var(--color-brand-teal)" />
+              <span style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
+                <HelpCircle size={18} color="var(--color-brand-teal)" style={{ flexShrink: 0 }} />
                 {item.question}
               </span>
               <ChevronDown
-                size={20}
+                size={18}
                 style={{
                   transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
                   transition: 'transform 0.2s ease',
+                  color: 'var(--color-text-muted)',
                   flexShrink: 0
                 }}
               />
@@ -62,12 +63,12 @@ export const Accordion = ({ items = [] }) => {
                 role="region"
                 aria-labelledby={`faq-header-${idx}`}
                 style={{
-                  marginTop: '1rem',
-                  paddingTop: '1rem',
-                  borderTop: '1px solid var(--color-slate-light)',
-                  fontSize: '1rem',
-                  color: 'var(--color-text-muted)',
-                  lineHeight: 1.6
+                  marginTop: '0.75rem',
+                  paddingTop: '0.75rem',
+                  borderTop: '1px solid var(--color-border)',
+                  fontSize: '0.95rem',
+                  color: 'var(--color-text-main)',
+                  lineHeight: 1.55
                 }}
               >
                 {item.answer}

@@ -16,8 +16,10 @@ export const AccessibilityProvider = ({ children }) => {
     localStorage.setItem('cogni_high_contrast', highContrast);
     if (highContrast) {
       document.documentElement.classList.add('high-contrast');
+      document.documentElement.setAttribute('data-theme', 'dark');
     } else {
       document.documentElement.classList.remove('high-contrast');
+      document.documentElement.removeAttribute('data-theme');
     }
   }, [highContrast]);
 

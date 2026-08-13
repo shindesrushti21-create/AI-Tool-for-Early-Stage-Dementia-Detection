@@ -11,29 +11,28 @@ export const NotFoundPage = () => {
         <meta name="description" content="The page you are looking for does not exist. Return to your screening dashboard or landing page." />
       </Helmet>
 
-      <div className="main-container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 'calc(100vh - 200px)', padding: '2rem 1.5rem' }}>
-        <div className="card" style={{ maxWidth: '580px', width: '100%', textAlign: 'center', padding: '3.5rem 2rem' }}>
-          <div style={{ width: '72px', height: '72px', borderRadius: '50%', backgroundColor: '#FEF3C7', color: '#D97706', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.5rem' }}>
-            <AlertTriangle size={42} />
+      <div className="main-container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: 'calc(100vh - 180px)', padding: '1.5rem 1rem' }}>
+        <div className="card" style={{ maxWidth: '500px', width: '100%', textAlign: 'center', padding: '2.5rem 1.75rem' }}>
+          <div style={{ width: '62px', height: '62px', borderRadius: '50%', backgroundColor: 'var(--color-mod-risk-bg)', color: 'var(--color-mod-risk)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1.25rem', border: '1px solid var(--color-mod-risk-border)' }}>
+            <AlertTriangle size={36} />
           </div>
 
-          <h1 style={{ fontSize: '2.4rem', color: 'var(--color-navy)', marginBottom: '0.75rem' }}>
+          <h1 style={{ fontSize: '1.65rem', color: 'var(--color-heading)', marginBottom: '0.6rem' }}>
             404 — Page Not Found
           </h1>
 
-          <p style={{ color: 'var(--color-text-muted)', fontSize: '1.1rem', lineHeight: 1.6, marginBottom: '2.25rem' }}>
+          <p style={{ color: 'var(--color-text-muted)', fontSize: '0.95rem', lineHeight: 1.6, marginBottom: '2rem' }}>
             We couldn't find the page or screening resource you were trying to access. Let's get you back to your cognitive screening dashboard.
           </p>
 
-          {/* Checklist Item #1: Dedicated 404 component on * route with friendly message + link back to /dashboard */}
-          <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link to="/dashboard" className="btn btn-primary btn-lg">
-              <LayoutDashboard size={20} />
+              <LayoutDashboard size={18} />
               Back to Dashboard
             </Link>
 
             <Link to="/" className="btn btn-secondary btn-lg">
-              <Home size={20} />
+              <Home size={18} />
               Go to Home Page
             </Link>
           </div>

@@ -26,7 +26,7 @@ export const Breadcrumbs = () => {
   return (
     <nav aria-label="Breadcrumb" className="breadcrumb-trail">
       <Link to="/dashboard">
-        <Home size={16} style={{ display: 'inline', marginRight: '4px', verticalAlign: 'text-bottom' }} />
+        <Home size={14} style={{ display: 'inline', marginRight: '4px', verticalAlign: 'text-bottom' }} />
         Home
       </Link>
       {pathnames.map((value, index) => {
@@ -36,9 +36,9 @@ export const Breadcrumbs = () => {
 
         return (
           <React.Fragment key={to}>
-            <ChevronRight size={14} className="text-muted" />
+            <ChevronRight size={13} style={{ color: 'var(--color-text-muted)' }} />
             {isLast ? (
-              <span aria-current="page" style={{ fontWeight: 600, color: 'var(--color-text-main)' }}>
+              <span aria-current="page" style={{ fontWeight: 600, color: 'var(--color-heading)' }}>
                 {displayName}
               </span>
             ) : (

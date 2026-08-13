@@ -1,6 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Users, Award, Heart, Mail } from 'lucide-react';
+import { Users } from 'lucide-react';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 
 export const TeamPage = () => {
@@ -38,35 +38,35 @@ export const TeamPage = () => {
       <div className="main-container">
         <Breadcrumbs />
 
-        <div style={{ textAlign: 'center', maxWidth: '750px', margin: '0 auto 3rem' }}>
-          <div style={{ width: '60px', height: '60px', borderRadius: '50%', backgroundColor: 'var(--color-brand-teal-light)', color: 'var(--color-brand-teal-dark)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
-            <Users size={30} />
+        <div style={{ textAlign: 'center', maxWidth: '680px', margin: '0 auto 2.25rem' }}>
+          <div style={{ width: '50px', height: '50px', borderRadius: '50%', backgroundColor: 'var(--color-brand-teal-light)', color: 'var(--color-brand-teal-dark)', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', marginBottom: '0.75rem' }}>
+            <Users size={26} />
           </div>
-          <h1 style={{ fontSize: '2.2rem', color: 'var(--color-navy)', marginBottom: '0.75rem' }}>
+          <h1 style={{ fontSize: '1.75rem', color: 'var(--color-heading)', marginBottom: '0.5rem' }}>
             Meet Our NGO Team & Medical Board
           </h1>
-          <p style={{ color: 'var(--color-text-muted)', fontSize: '1.1rem' }}>
+          <p style={{ color: 'var(--color-text-muted)', fontSize: '0.95rem' }}>
             Dedicated clinicians, AI engineers, and community health officers working together to make early dementia screening universally accessible.
           </p>
         </div>
 
-        {/* TEAM PHOTO GRID — Checklist Item #20 & #16 */}
-        <div className="grid-3" style={{ gap: '2rem', marginBottom: '3rem' }}>
+        {/* TEAM PHOTO GRID — Checklist Items #20 & #16 */}
+        <div className="grid-3" style={{ gap: '1.5rem', marginBottom: '2.5rem' }}>
           {teamMembers.map((member, idx) => (
             <div key={idx} className="card" style={{ padding: '0', overflow: 'hidden', textAlign: 'center' }}>
               <img
                 src={member.photo}
                 alt={member.alt}
-                style={{ width: '100%', height: '260px', objectFit: 'cover' }}
+                style={{ width: '100%', height: '220px', objectFit: 'cover' }}
               />
-              <div style={{ padding: '1.5rem' }}>
-                <h3 style={{ fontSize: '1.3rem', color: 'var(--color-navy)', marginBottom: '0.25rem' }}>
+              <div style={{ padding: '1.25rem 1.35rem' }}>
+                <h3 style={{ fontSize: '1.15rem', color: 'var(--color-heading)', marginBottom: '0.2rem' }}>
                   {member.name}
                 </h3>
-                <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--color-brand-teal)', textTransform: 'uppercase', letterSpacing: '0.04em', display: 'block', marginBottom: '0.75rem' }}>
+                <span style={{ fontSize: '0.775rem', fontWeight: 700, color: 'var(--color-brand-teal)', textTransform: 'uppercase', letterSpacing: '0.04em', display: 'block', marginBottom: '0.6rem' }}>
                   {member.role}
                 </span>
-                <p style={{ color: 'var(--color-text-muted)', fontSize: '0.95rem', lineHeight: 1.6 }}>
+                <p style={{ color: 'var(--color-text-muted)', fontSize: '0.875rem', lineHeight: 1.6 }}>
                   {member.bio}
                 </p>
               </div>
