@@ -1,0 +1,20 @@
+{
+  "name": "ai-tool-for-early-stage-dementia-detection",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AI-based early dementia and cognitive screening tool (Monorepo Workspace)",
+  "scripts": {
+    "dev": "npm run dev:frontend",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev:backend": "npm --prefix backend run dev",
+    "build:frontend": "npm --prefix frontend run build",
+    "start:backend": "npm --prefix backend start",
+    "migrate:backend": "npm --prefix backend run migrate",
+    "setup:backend": "npm --prefix backend run setup"
+  },
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "license": "MIT"
+}
