@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Activity, Phone, Mail, ShieldCheck, Heart } from 'lucide-react';
+import { useAccessibility } from '../context/AccessibilityContext';
 
 export const Footer = () => {
+  const { t } = useAccessibility();
+
   return (
     <footer className="site-footer" role="contentinfo">
       <div style={{ maxWidth: '1140px', margin: '0 auto', padding: '0 1.25rem 1.25rem' }}>
@@ -13,18 +16,18 @@ export const Footer = () => {
               CogniGuard NGO
             </div>
             <p style={{ fontSize: '0.875rem', color: '#94A3B8', lineHeight: 1.6 }}>
-              A low-cost, accessible AI cognitive screening platform enabling early dementia and MCI detection through voice, reaction latency, and memory recall evaluation.
+              {t('hero_subtitle')}
             </p>
           </div>
 
           <div>
             <h4 style={{ color: '#FFFFFF', marginBottom: '0.85rem', fontSize: '1rem', fontWeight: 700 }}>Quick Navigation</h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.5rem', fontSize: '0.875rem' }}>
-              <li><Link to="/case-studies">Clinical Case Studies</Link></li>
-              <li><Link to="/faqs">Frequently Asked Questions</Link></li>
-              <li><Link to="/reviews">Patient & Clinician Reviews</Link></li>
-              <li><Link to="/team">Healthcare Team & Bios</Link></li>
-              <li><Link to="/privacy-policy">Data Privacy & Compliance</Link></li>
+              <li><Link to="/case-studies">{t('nav_case_studies')}</Link></li>
+              <li><Link to="/faqs">{t('nav_faqs')}</Link></li>
+              <li><Link to="/reviews">{t('nav_reviews')}</Link></li>
+              <li><Link to="/team">{t('nav_team')}</Link></li>
+              <li><Link to="/privacy-policy">{t('nav_privacy')}</Link></li>
             </ul>
           </div>
 

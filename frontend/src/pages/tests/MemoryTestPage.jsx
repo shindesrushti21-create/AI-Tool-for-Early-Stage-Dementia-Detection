@@ -5,12 +5,14 @@ import { Brain, CheckCircle, ArrowRight, Clock } from 'lucide-react';
 import { Breadcrumbs } from '../../components/Breadcrumbs';
 import api from '../../api/client';
 import { trackEvent } from '../../utils/analytics';
+import { useAccessibility } from '../../context/AccessibilityContext';
 
 const TARGET_WORDS = ['Apple', 'Clock', 'River', 'Garden', 'Blanket'];
 
 export const MemoryTestPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { t } = useAccessibility();
 
   const sessionId = location.state?.sessionId || sessionStorage.getItem('current_session_id') || `sess_${Date.now()}`;
 
@@ -84,7 +86,7 @@ export const MemoryTestPage = () => {
   return (
     <>
       <Helmet>
-        <title>Memory Recall Test — Step 1 of 3 — CogniGuard</title>
+        <title>{t('test_memory_title')} — Step 1 of 3 — CogniGuard</title>
         <meta name="description" content="Step 1 of dementia cognitive assessment: short-term memory word exposure and recall evaluation." />
       </Helmet>
 
@@ -94,7 +96,7 @@ export const MemoryTestPage = () => {
         {/* STEP PROGRESS BAR */}
         <div style={{ marginBottom: '1.5rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.4rem', fontSize: '0.85rem', fontWeight: 700, color: 'var(--color-heading)' }}>
-            <span>Step 1 of 3: Short-Term Memory Assessment</span>
+            <span>{t('test_memory_title')}</span>
             <span>33% Completed</span>
           </div>
           <div style={{ height: '6px', backgroundColor: 'var(--color-border)', borderRadius: '9999px', overflow: 'hidden' }}>
@@ -108,11 +110,11 @@ export const MemoryTestPage = () => {
               <Brain size={26} />
             </div>
             <h1 style={{ fontSize: '1.5rem', color: 'var(--color-heading)', marginBottom: '0.35rem' }}>
-              Short-Term Memory Word Recall
+              {t('test_memory_title')}
             </h1>
             <p style={{ color: 'var(--color-text-muted)', fontSize: '0.9rem' }}>
               {phase === 'exposure' 
-                ? 'Memorize the 5 words below before the timer runs out.' 
+                ? t('test_memory_desc') 
                 : 'Now select or type as many of the 5 words as you can remember.'}
             </p>
           </div>

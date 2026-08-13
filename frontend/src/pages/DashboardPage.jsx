@@ -4,11 +4,13 @@ import { Helmet } from 'react-helmet-async';
 import { Play, FileText, Calendar, CheckCircle2, Brain } from 'lucide-react';
 import { Breadcrumbs } from '../components/Breadcrumbs';
 import { useAuth } from '../context/AuthContext';
+import { useAccessibility } from '../context/AccessibilityContext';
 import api from '../api/client';
 import { trackEvent } from '../utils/analytics';
 
 export const DashboardPage = () => {
   const { user } = useAuth();
+  const { t } = useAccessibility();
   const navigate = useNavigate();
   const [starting, setStarting] = useState(false);
 
@@ -62,13 +64,13 @@ export const DashboardPage = () => {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1.25rem' }}>
             <div>
               <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', backgroundColor: 'var(--color-brand-teal-light)', color: 'var(--color-brand-teal-dark)', padding: '0.25rem 0.65rem', borderRadius: '9999px', fontSize: '0.8rem', fontWeight: 700, marginBottom: '0.5rem' }}>
-                <Brain size={14} /> Patient Profile Active
+                <Brain size={14} /> {t('dashboard_badge')}
               </div>
               <h1 style={{ color: 'var(--color-heading)', fontSize: '1.65rem', marginBottom: '0.25rem' }}>
-                Welcome, {user?.name || 'Senior Participant'}
+                {t('dashboard_welcome')} {user?.name || 'Senior Participant'}
               </h1>
               <p style={{ color: 'var(--color-text-muted)', fontSize: '0.9rem' }}>
-                Age: <strong style={{ color: 'var(--color-heading)' }}>{user?.age || 68} years</strong> | Language: <strong style={{ color: 'var(--color-heading)' }}>{user?.preferred_language || 'English'}</strong> | NGO Screening ID: #{user?.id || 'usr_demo'}
+                {t('dashboard_age')}: <strong style={{ color: 'var(--color-heading)' }}>{user?.age || 68} years</strong> | {t('dashboard_language')}: <strong style={{ color: 'var(--color-heading)' }}>{user?.preferred_language || 'English'}</strong> | NGO Screening ID: #{user?.id || 'usr_demo'}
               </p>
             </div>
 
@@ -79,7 +81,7 @@ export const DashboardPage = () => {
               style={{ minWidth: '220px' }}
             >
               <Play size={18} fill="#FFFFFF" />
-              {starting ? 'Initializing Test...' : 'Start New 5-Min Screening'}
+              {starting ? t('dashboard_starting') : t('dashboard_start_btn')}
             </button>
           </div>
         </div>

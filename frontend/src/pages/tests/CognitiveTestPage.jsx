@@ -5,10 +5,12 @@ import { Zap, Target, ArrowRight, RefreshCw, CheckCircle2 } from 'lucide-react';
 import { Breadcrumbs } from '../../components/Breadcrumbs';
 import api from '../../api/client';
 import { trackEvent } from '../../utils/analytics';
+import { useAccessibility } from '../../context/AccessibilityContext';
 
 export const CognitiveTestPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { t } = useAccessibility();
 
   const sessionId = location.state?.sessionId || sessionStorage.getItem('current_session_id') || `sess_${Date.now()}`;
 
@@ -98,8 +100,8 @@ export const CognitiveTestPage = () => {
   return (
     <>
       <Helmet>
-        <title>Cognitive Latency Test — Step 2 of 3 — CogniGuard</title>
-        <meta name="description" content="Step 2 of dementia screening: visual reaction latency and motor-cognitive speed measurement." />
+        <title>{t('test_cognitive_title')} — Step 2 of 3 — CogniGuard</title>
+        <meta name="description" content="Step 2 of dementia cognitive screening: visual reaction latency measurement in milliseconds." />
       </Helmet>
 
       <div className="main-container">

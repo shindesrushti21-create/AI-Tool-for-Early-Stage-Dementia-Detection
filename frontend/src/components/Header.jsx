@@ -6,7 +6,7 @@ import { useAccessibility } from '../context/AccessibilityContext';
 
 export const Header = () => {
   const { isAuthenticated, user, logout } = useAuth();
-  const { toggleFontSize, fontSize, highContrast, toggleHighContrast, language, setLanguage } = useAccessibility();
+  const { toggleFontSize, fontSize, highContrast, toggleHighContrast, language, setLanguage, t } = useAccessibility();
 
   return (
     <header className="header-nav" role="banner">
@@ -19,11 +19,11 @@ export const Header = () => {
         {/* Navigation Links */}
         <nav aria-label="Main Navigation">
           <ul className="nav-links">
-            <li><NavLink to="/case-studies">Case Studies</NavLink></li>
-            <li><NavLink to="/faqs">FAQs</NavLink></li>
-            <li><NavLink to="/reviews">Reviews</NavLink></li>
-            <li><NavLink to="/team">Team</NavLink></li>
-            <li><NavLink to="/privacy-policy">Privacy Policy</NavLink></li>
+            <li><NavLink to="/case-studies">{t('nav_case_studies')}</NavLink></li>
+            <li><NavLink to="/faqs">{t('nav_faqs')}</NavLink></li>
+            <li><NavLink to="/reviews">{t('nav_reviews')}</NavLink></li>
+            <li><NavLink to="/team">{t('nav_team')}</NavLink></li>
+            <li><NavLink to="/privacy-policy">{t('nav_privacy')}</NavLink></li>
           </ul>
         </nav>
 
@@ -74,13 +74,13 @@ export const Header = () => {
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
               <Link to="/dashboard" className="btn btn-primary" style={{ padding: '0.35rem 0.85rem', minHeight: '34px', fontSize: '0.85rem' }}>
                 <User size={14} />
-                {user?.name?.split(' ')[0] || 'Dashboard'}
+                {user?.name?.split(' ')[0] || t('nav_dashboard')}
               </Link>
               <button
                 onClick={logout}
                 className="btn btn-secondary"
-                title="Log Out"
-                aria-label="Log Out"
+                title={t('nav_logout')}
+                aria-label={t('nav_logout')}
                 style={{ padding: '0.35rem 0.5rem', minHeight: '34px' }}
               >
                 <LogOut size={14} />
@@ -88,7 +88,7 @@ export const Header = () => {
             </div>
           ) : (
             <Link to="/login" className="btn btn-primary" style={{ padding: '0.35rem 0.9rem', minHeight: '34px', fontSize: '0.85rem' }}>
-              Log In
+              {t('nav_login')}
             </Link>
           )}
         </div>

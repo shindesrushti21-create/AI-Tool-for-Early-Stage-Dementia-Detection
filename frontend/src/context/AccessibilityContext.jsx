@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
+import { createT } from '../i18n/translations';
 
 const AccessibilityContext = createContext();
 
@@ -35,6 +36,8 @@ export const AccessibilityProvider = ({ children }) => {
 
   const toggleHighContrast = () => setHighContrast(prev => !prev);
 
+  const t = useMemo(() => createT(language), [language]);
+
   return (
     <AccessibilityContext.Provider value={{
       fontSize,
@@ -43,7 +46,8 @@ export const AccessibilityProvider = ({ children }) => {
       highContrast,
       toggleHighContrast,
       language,
-      setLanguage
+      setLanguage,
+      t
     }}>
       {children}
     </AccessibilityContext.Provider>

@@ -10,7 +10,7 @@ import { useAccessibility } from '../../context/AccessibilityContext';
 export const SpeechTestPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { language, setLanguage } = useAccessibility();
+  const { language, setLanguage, t } = useAccessibility();
 
   const sessionId = location.state?.sessionId || sessionStorage.getItem('current_session_id') || `sess_${Date.now()}`;
 
@@ -113,14 +113,12 @@ export const SpeechTestPage = () => {
     }
   };
 
-  const promptText = language.startsWith('hi') 
-    ? 'कृपया अपनी सुबह की दिनचर्या के बारे में 2-3 वाक्यों में बताएं (जैसे: आप कब उठते हैं, चाय पीना, सैर पर जाना)।'
-    : 'Please describe your typical morning routine in 2 to 3 sentences (e.g. what time you wake up, having breakfast, going for a walk).';
+  const promptText = t('speech_prompt_text');
 
   return (
     <>
       <Helmet>
-        <title>Speech Pattern Analysis — Step 3 of 3 — CogniGuard</title>
+        <title>{t('speech_title')} — Step 3 of 3 — CogniGuard</title>
         <meta name="description" content="Step 3 of dementia screening: Web Speech voice analysis measuring hesitation pauses and vocabulary flow." />
       </Helmet>
 
@@ -130,7 +128,7 @@ export const SpeechTestPage = () => {
         {/* STEP PROGRESS BAR */}
         <div style={{ marginBottom: '1.5rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.4rem', fontSize: '0.85rem', fontWeight: 700, color: 'var(--color-heading)' }}>
-            <span>Step 3 of 3: Speech & Acoustic Pattern Analysis</span>
+            <span>{t('speech_step')}</span>
             <span>100% Completed</span>
           </div>
           <div style={{ height: '6px', backgroundColor: 'var(--color-border)', borderRadius: '9999px', overflow: 'hidden' }}>
@@ -144,17 +142,17 @@ export const SpeechTestPage = () => {
               <Mic size={26} />
             </div>
             <h1 style={{ fontSize: '1.5rem', color: 'var(--color-heading)', marginBottom: '0.35rem' }}>
-              Vernacular Speech & Acoustic Analysis
+              {t('speech_title')}
             </h1>
             <p style={{ color: 'var(--color-text-muted)', fontSize: '0.9rem' }}>
-              Voice rhythm, pause ratios, and vocabulary repetition provide subtle cognitive signals.
+              {t('speech_subtitle')}
             </p>
           </div>
 
           {/* VERNACULAR LANGUAGE SELECTOR */}
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.65rem', marginBottom: '1.25rem', backgroundColor: 'var(--color-card-subtle)', padding: '0.6rem', borderRadius: 'var(--radius-md)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', flexWrap: 'wrap', marginBottom: '1.25rem', backgroundColor: 'var(--color-card-subtle)', padding: '0.6rem', borderRadius: 'var(--radius-md)' }}>
             <Globe size={18} color="var(--color-brand-teal)" />
-            <span style={{ fontWeight: 700, fontSize: '0.85rem', color: 'var(--color-heading)' }}>Select Speech Language:</span>
+            <span style={{ fontWeight: 700, fontSize: '0.85rem', color: 'var(--color-heading)' }}>{t('speech_lang_label')}</span>
             <button
               type="button"
               onClick={() => handleLanguageToggle('en-US')}
@@ -171,12 +169,28 @@ export const SpeechTestPage = () => {
             >
               हिंदी (Hindi)
             </button>
+            <button
+              type="button"
+              onClick={() => handleLanguageToggle('mr-IN')}
+              className={`btn ${language === 'mr-IN' ? 'btn-primary' : 'btn-secondary'}`}
+              style={{ padding: '0.35rem 0.75rem', minHeight: '34px', fontSize: '0.825rem' }}
+            >
+              मराठी (Marathi)
+            </button>
+            <button
+              type="button"
+              onClick={() => handleLanguageToggle('ta-IN')}
+              className={`btn ${language === 'ta-IN' ? 'btn-primary' : 'btn-secondary'}`}
+              style={{ padding: '0.35rem 0.75rem', minHeight: '34px', fontSize: '0.825rem' }}
+            >
+              தமிழ் (Tamil)
+            </button>
           </div>
 
           {/* SPEAKING PROMPT BOX */}
           <div className="card" style={{ backgroundColor: 'var(--color-card-subtle)', borderLeft: '4px solid var(--color-brand-teal)', marginBottom: '1.5rem', padding: '1rem 1.25rem' }}>
             <h3 style={{ fontSize: '0.95rem', color: 'var(--color-heading)', marginBottom: '0.25rem', display: 'flex', alignItems: 'center', gap: '0.4rem' }}>
-              <Volume2 size={16} color="var(--color-brand-teal)" /> Voice Speech Prompt:
+              <Volume2 size={16} color="var(--color-brand-teal)" /> {t('speech_prompt_label')}
             </h3>
             <p style={{ fontSize: '0.95rem', color: 'var(--color-heading)', fontWeight: 600 }}>
               "{promptText}"
@@ -201,11 +215,11 @@ export const SpeechTestPage = () => {
             >
               {isListening ? (
                 <>
-                  <MicOff size={20} /> Stop Recording Voice
+                  <MicOff size={20} /> {t('speech_mic_listening')}
                 </>
               ) : (
                 <>
-                  <Mic size={20} /> Press to Start Voice Recording
+                  <Mic size={20} /> {t('speech_mic_start')}
                 </>
               )}
             </button>
@@ -233,13 +247,13 @@ export const SpeechTestPage = () => {
           <form onSubmit={handleSubmit}>
             <div className="form-group" style={{ marginBottom: '1.5rem' }}>
               <label htmlFor="speech-transcript" className="form-label">
-                Captured Voice Transcript (or Type Manually):
+                {t('speech_transcript_label') || 'Captured Voice Transcript (or Type Manually):'}
               </label>
               <textarea
                 id="speech-transcript"
                 rows="3"
                 required
-                placeholder="Click the microphone button above to speak, or type your response here..."
+                placeholder={t('speech_placeholder')}
                 value={transcript}
                 onChange={(e) => setTranscript(e.target.value)}
                 className="form-textarea"
@@ -253,7 +267,7 @@ export const SpeechTestPage = () => {
               className="btn btn-primary btn-lg"
               style={{ width: '100%' }}
             >
-              {submitting ? 'Generating Clinical Risk Report...' : 'Finalize Screening & View Risk Score Report'}
+              {submitting ? t('speech_analyzing') : t('speech_submit_btn')}
               <ArrowRight size={18} />
             </button>
           </form>
