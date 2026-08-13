@@ -11,14 +11,18 @@ const PORT = parseInt(process.env.PORT || '5000', 10);
 pool.query('SELECT 1')
   .then(() => {
     console.log('✅  Database connection established');
-    app.listen(PORT, () => {
-      console.log(`🚀  CogniCare API running on http://localhost:${PORT}`);
-      console.log(`📋  Health check: http://localhost:${PORT}/health`);
-      console.log(`⏱️   Response-time SLA: ${process.env.RESPONSE_TIME_SLA_MS || 300}ms`);
-    });
+    startServer();
   })
   .catch((err) => {
-    console.error('❌  Could not connect to PostgreSQL:', err.message);
-    console.error('    Ensure DATABASE_URL is set correctly in your .env file');
-    process.exit(1);
+    console.warn('⚠️   Could not connect to PostgreSQL database:', err.message);
+    console.warn('💡  Running API server in standalone mode. Set DATABASE_URL in .env to connect PostgreSQL.');
+    startServer();
   });
+
+function startServer() {
+  app.listen(PORT, () => {
+    console.log(`🚀  CogniCare API running on http://localhost:${PORT}`);
+    console.log(`📋  Health check: http://localhost:${PORT}/health`);
+    console.log(`⏱️   Response-time SLA: ${process.env.RESPONSE_TIME_SLA_MS || 300}ms`);
+  });
+}
