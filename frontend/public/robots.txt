@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /dashboard
+Disallow: /test/
+Disallow: /report/
+
+Sitemap: https://cogniguard-dementia-screening.org/sitemap.xml

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CogniGuard — AI-Based Early Dementia & Cognitive Screening</title>
+    
+    <!-- Open Graph Social Share Tags (Checklist #13) -->
+    <meta property="og:title" content="CogniGuard — Accessible Early Dementia Screening Tool" />
+    <meta property="og:description" content="AI-based 5-minute screening assessing memory recall, reaction speed, and speech patterns for early dementia detection." />
+    <meta property="og:image" content="https://cogniguard-dementia-screening.org/og-share-card.png" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Google Fonts: Plus Jakarta Sans & Readex Pro for senior legibility -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Readex+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Google Analytics Script (Checklist #19) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DEMO123456"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-DEMO123456', { send_page_view: true });
+    </script>
+
+    <!-- Schema JSON-LD Local Organization Script (Checklist #17) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MedicalOrganization",
+      "name": "CogniGuard Dementia Screening NGO",
+      "url": "https://cogniguard-dementia-screening.org",
+      "logo": "https://cogniguard-dementia-screening.org/favicon.svg",
+      "description": "AI-driven accessible cognitive, speech, and memory screening tool for early dementia detection.",
+      "medicalSpecialty": "Geriatric Neurology & MCI Screening"
+    }
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
