@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Sitemap location (update to your production domain)
+Sitemap: https://cognicare.org/sitemap.xml
